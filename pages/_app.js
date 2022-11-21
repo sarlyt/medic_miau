@@ -23,12 +23,12 @@ function MyApp({ Component, pageProps }) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Login></Login>
+            <FullLayout>
+              <Component {...pageProps} />
+            </FullLayout>
     </>
   );
 }
+//<Login></Login>
 
-//      <FullLayout>
-//        <Component {...pageProps} />
-//      </FullLayout>
 export default MyApp;
