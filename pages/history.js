@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useState } from "react";
 import {
     Card,
     Container,
@@ -15,6 +16,31 @@ import {
 } from 'reactstrap';
 
 export default function Home() {
+    const [alergias, setAlergias] = useState(true);
+    //Funcion pro
+    function toggle_alergias(){
+        setAlergias(!alergias);
+    }
+    const [alcohol, setAlcohol] = useState(true);
+    //Funcion pro
+    function toggle_alcohol(){
+        setAlcohol(!alcohol);
+    }
+    const [cigarros, setCigarros] = useState(true);
+    //Funcion pro
+    function toggle_cigarros(){
+        setCigarros(!cigarros);
+    }
+    const [drugs, setDrugs] = useState(true);
+    //Funcion pro
+    function toggle_drugs(){
+        setDrugs(!drugs);
+    }
+    const [medicinas, setMedicinas] = useState(true);
+    //Funcion pro
+    function toggle_medicinas(){
+        setMedicinas(!medicinas);
+    }
     return (
     <div>
         <Head>
@@ -31,31 +57,31 @@ export default function Home() {
                 <Form>
                     <FormGroup check inline >
                             <Label check>
-                                <Input type="checkbox" />{' '}
+                                <Input onChange={toggle_alergias} type="checkbox" />{' '}
                                 Alergias
                             </Label>
                         </FormGroup>
                         <FormGroup check inline>
                             <Label check>
-                                <Input type="checkbox" />{' '}
+                                <Input onChange={toggle_alcohol} type="checkbox" />{' '}
                                 Consumo de Alcohol
                             </Label>
                         </FormGroup>
                         <FormGroup check inline>
                             <Label check>
-                                <Input type="checkbox" />{' '}
+                                <Input onChange={toggle_cigarros} type="checkbox" />{' '}
                                 Tabaquismo
                             </Label>
                         </FormGroup>
                         <FormGroup check inline>
                             <Label check>
-                                <Input type="checkbox" />{' '}
+                                <Input onChange={toggle_drugs}type="checkbox" />{' '}
                                 Drogas ilicitas
                             </Label>
                         </FormGroup>
                         <FormGroup check inline>
                             <Label check>
-                                <Input type="checkbox" />{' '}
+                                <Input onChange={toggle_medicinas} type="checkbox" />{' '}
                                 Medicamentos
                             </Label>
                         </FormGroup>
@@ -133,33 +159,71 @@ export default function Home() {
 
 
             <Row>
-                <Col xs="12" md="4">
+                <Col hidden={alergias} xs="12" md="4">
                     <FormGroup inline>
-                        <Label for="exampleUser">Nombre Completo</Label>
+                        <Label for="alergias">Indica a que eres Alergico</Label>
                         <Input
                             required 
-                            id="exampleUser"
-                            name="usuario"
-                            //placeholder="Nombre"
+                            id="alergias"
+                            name="alergias_name"
                         />
                     </FormGroup>
                 </Col>
-                <Col xs="12" md="4">
-
+                <Col hidden={alcohol} xs="12" md="4">
+                    <FormGroup inline>
+                        <Label for="alcohol">¿Cada cuanto tomas Alcohol?</Label>
+                        <Input
+                            required 
+                            id="alcohol"
+                            name="alcohol_name"
+                        />
+                    </FormGroup>
                 </Col>
-                <Col xs="12" md="4">
-
+                <Col hidden={cigarros} xs="12" md="4">
+                    <FormGroup inline>
+                        <Label for="cigarros">Cigarros por día</Label>
+                        <Input
+                            required 
+                            id="cigarros"
+                            name="dejazion_name"
+                        />
+                    </FormGroup>
                 </Col>
-                <Col xs="12" md="4">
-
+                <Col hidden={drugs} xs="12" md="4">
+                    <FormGroup inline>
+                        <Label for="drugs">Droga, cantidad y frecuencia</Label>
+                        <Input
+                            required 
+                            id="drugs"
+                            name="drugs_name"
+                        />
+                    </FormGroup>
                 </Col>
-                <Col xs="12" md="4">
-
+                <Col hidden={medicinas} xs="12" md="4">
+                    <FormGroup inline>
+                        <Label for="medicinas">Medicamentos y frecuencia</Label>
+                        <Input
+                            required 
+                            id="medicinas"
+                            name="medicinas_name"
+                        />
+                    </FormGroup>
                 </Col>
             </Row>
 
             <Row>
-
+            <FormGroup>
+                <Label for="exampleText">Comorbilidades</Label>
+                <Input type="textarea" name="text" id="exampleText" />
+            </FormGroup>
+            </Row>
+            <Row>
+                <Col xs="12" md="6">
+                <Button color="success" size="lg" block>Enviar</Button>
+                </Col>
+                <Col xs="12" md="6">
+                <Button color="danger" size="lg" block>Cancelar</Button>
+                </Col>
             </Row>
         </Container>
     </div>
