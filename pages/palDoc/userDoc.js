@@ -85,7 +85,7 @@ export default function Home() {
                 <Button>Guardar</Button>
                 </Form>
             </Col>
-            <Col xs="6">
+            <Col xs="12" md="6">
                 <h1>Datos Profesionales</h1>
                 <FormGroup>
                     <Label for="exampleUser">Especialidad</Label>
