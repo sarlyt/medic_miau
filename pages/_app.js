@@ -1,15 +1,23 @@
 import FullLayout from "../src/layouts/FullLayout";
 import Head from "next/head";
 import "../styles/style.scss";
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import Login from '../pages/login'
 
 function MyApp({ Component, pageProps }) {
-
+  const [showLogin, setShowLogin]= useState(true);
 
 
   useEffect(() => {
-   console.log("Entro en principal");
+    var isLogged = localStorage.getItem("isLogged");
+    if(isLogged != null ){
+      console.log('no es nulo');
+      if(isLogged== 'true'){
+        setShowLogin(false);
+      }
+    }
+
+    console.log("Entro en principal", isLogged);
 }, []);
 
 
@@ -23,12 +31,15 @@ function MyApp({ Component, pageProps }) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {showLogin?
+            <Login></Login>
+      :
             <FullLayout>
               <Component {...pageProps} />
             </FullLayout>
+      }
     </>
   );
 }
-//<Login></Login>
 
 export default MyApp;

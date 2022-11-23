@@ -1,0 +1,14 @@
+###
+GET http://localhost:3001/api/usuario/login/qewtr/1234
+###
+GET http://localhost:3001/api/usuario/get-all
+###
+POST  http://localhost:3001/api/usuario/registrar
+Content-Type: application/json
+
+{
+    "userName": "qewtr",
+    "password": "1234",
+    "tipo": "DOCTOR"
+}
+

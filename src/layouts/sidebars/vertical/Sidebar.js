@@ -5,8 +5,9 @@ import user from "../../../assets/images/sidebar_img/user.svg";
 import historial from "../../../assets/images/sidebar_img/historial.svg";
 import zitas from "../../../assets/images/sidebar_img/zitas.svg";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
-const navigation = [
+const navigationUser = [
   {
     title: "Perfil",
     href: "/user",
@@ -47,6 +48,21 @@ const navigationDoc = [
 const Sidebar = ({ showMobilemenu }) => {
   let curl = useRouter();
   const location = curl.pathname;
+  const [navegacion, setNavegacion]= useState([]);
+
+
+
+  useEffect(() => {
+    var getlocal = localStorage.getItem("tipo").replaceAll('"','');
+    if(getlocal=='USUARIO'){
+      setNavegacion(navigationUser);
+    }else{
+      setNavegacion(navigationDoc);
+    }
+    console.log(getlocal);
+
+
+  }, []);
 
   return (
     <div className="p-3">
@@ -61,7 +77,7 @@ const Sidebar = ({ showMobilemenu }) => {
       </div>
       <div className="pt-4 mt-2">
         <Nav vertical className="sidebarNav">
-          {navigationDoc.map((navi, index) => (
+          {navegacion.map((navi, index) => (
             <NavItem key={index} className="sidenav-bg">
               <Link href={navi.href}>
                 <a

@@ -26,6 +26,14 @@ const Header = ({ showMobmenu }) => {
     setIsOpen(!isOpen);
   };
 
+  function cerrarSesion(){
+    localStorage.setItem("isLogged", JSON.stringify(false));
+    localStorage.setItem("id", JSON.stringify(null));
+    localStorage.setItem("userName", JSON.stringify(null));
+    localStorage.setItem("tipo", JSON.stringify(null));
+    location.reload();
+  }
+
   return (
     <Navbar color="primary" dark expand="md">
       <div className="d-flex align-items-center">
@@ -84,17 +92,18 @@ const Header = ({ showMobmenu }) => {
           </DropdownToggle>
           <DropdownMenu>
             <DropdownItem header>Info</DropdownItem>
-            <DropdownItem>Mi cuenta</DropdownItem>
-            <DropdownItem>Editar Perfil</DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem>Consultas</DropdownItem>
-            <DropdownItem>Notificaciones</DropdownItem>
-            <DropdownItem>Cerrar Sesión</DropdownItem>
+            <DropdownItem onClick={cerrarSesion}>Cerrar Sesión</DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </Collapse>
     </Navbar>
   );
 };
+
+//<DropdownItem>Mi cuenta</DropdownItem>
+//<DropdownItem>Editar Perfil</DropdownItem>
+//<DropdownItem divider />
+//<DropdownItem>Consultas</DropdownItem>
+//<DropdownItem>Notificaciones</DropdownItem>
 
 export default Header;
