@@ -8,7 +8,7 @@ module.exports = (sequelize, type)=>{
         id_usuario:type.INTEGER,
         nombre_completo:type.STRING,
         edad:type.INTEGER,
-        texo:type.STRING,
+        sexo:type.STRING,
         altura:type.DOUBLE,
         peso:type.DOUBLE,
         alergias:type.STRING,
