@@ -1,5 +1,5 @@
 ###
-GET http://localhost:3001/api/usuario/login/qewtr/1234
+GET http://localhost:3001/api/usuario/login/yolo1/123
 ###
 GET http://localhost:3001/api/usuario/get-all
 ###
@@ -7,8 +7,16 @@ POST  http://localhost:3001/api/usuario/registrar
 Content-Type: application/json
 
 {
-    "userName": "qewtr",
+    "userName": "yolo1",
+    "password": "123",
+    "tipo": "USUARIO"
+}
+
+###
+PUT http://localhost:3001/api/usuario/3
+Content-Type: application/json
+
+{
     "password": "1234",
     "tipo": "DOCTOR"
 }
-

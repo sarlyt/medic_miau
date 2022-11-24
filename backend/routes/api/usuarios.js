@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const {Usuario} = require('../../db');
 const {check, validationResult} = require('express-validator');
+const e = require("express");
 
 
 
@@ -32,13 +33,27 @@ router.get('/get-all', async (req, res)=>{
 
 router.post('/registrar', async(req, res,)=>{
     console.log(req.body);
-    const alumno = await Usuario.create(req.body);
-    res.json(alumno);
+    try {
+        const alumno = await Usuario.create(req.body);
+        res.json(alumno);
+        
+    } catch (error) {
+        console.log(error);
+        res.send("Esta mal weon");
+    }
 });
 
 router.get('/login/:userName/:password', async(req, res)=>{
     const{userName, password} = req.params;
-    const usuario = await Usuario.findOne({  where:{ userName, password } });
+
+    //const userName = req.params.userName;
+    //const password = req.params.password;
+
+    //{ userName, password }
+    
+    
+
+    const usuario = await Usuario.findOne({  where:{ 'userName':userName, 'password':password } });
     if (usuario === null) {
         console.log('Not found!');
         return res.status(404).json({msg: 'Usuario o Contraseña incorrectos' })
