@@ -45,7 +45,7 @@ export default function Home() {
             </Head>
             <Container style={{'textAlign':'center'}}>
             <h1>
-                Agenda agendosa
+                Agenda
             </h1>
                 <div style={{  'display': 'flex',
                 'justify-content': 'center' }}>
@@ -61,7 +61,7 @@ export default function Home() {
                         <th>#</th>
                         <th>Status</th>
                         <th>Identificador</th>
-                        <th>Médico</th>
+                        <th>Paciente</th>
                         <th>Fecha</th>
                         <th>Hora</th>
                         </tr>
@@ -69,21 +69,17 @@ export default function Home() {
                     <tbody>
                         <tr>
                             <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                            <td>En progreso</td>
+                            <td>312313</td>
+                            <td>Paciente1</td>
+                            <td>25/11/22</td>
+                            <td>3:00 pm</td>
                         </tr>
                         <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
+                            
                         </tr>
                         <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
+                        
                         </tr>
                     </tbody>
                 </Table>
