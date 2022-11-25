@@ -50,7 +50,7 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>Hola weon este es tu perfil</h1>
+      <h1>Bienvenido a tu perfil</h1>
       <Container>
         <Row className="mt-3">
           <Col md="6" xs="12">
