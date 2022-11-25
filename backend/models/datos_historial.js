@@ -11,16 +11,12 @@ module.exports = (sequelize, type)=>{
         sexo:type.STRING,
         altura:type.DOUBLE,
         peso:type.DOUBLE,
-        alergias:type.STRING,
-        alcohol:type.STRING,
-        tabaquismo:type.STRING,
-        drogas:type.STRING,
-        medicamentos:type.STRING,
-
+        tipo_sangre: type.STRING,
+        d_alergias:type.STRING,
+        d_alcohol:type.STRING,
+        d_tabaquismo:type.STRING,
+        d_drogas:type.STRING,
+        d_medicamentos:type.STRING,
+        comorbis: type.STRING
     });
 }
-
- 
-
-
-

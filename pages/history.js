@@ -1,5 +1,6 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "../src/config/AxiosConfig";
 import {
     Card,
     Container,
@@ -41,6 +42,29 @@ export default function Home() {
     function toggle_medicinas(){
         setMedicinas(!medicinas);
     }
+    const [id_usuario, setId_usuario] = useState("");
+    const [nombre_completo, setNombre_completo] = useState("");
+    const [edad, setEdad] = useState(0);
+    const [sexo, setSexo] = useState("");
+    const [altura, setAltura] = useState(0);
+    const [peso, setPeso] = useState(0);
+    const [tipo_sangre, setTipo_sangre] = useState("");
+    const [d_alergias, setD_alergias] = useState("");
+    const [d_alcohol, setD_alcohol] = useState("");
+    const [d_tabaquismo, setD_tabaquismo] = useState("");
+    const [d_drogas, setD_drogas] = useState("");
+    const [d_medicamentos, setD_medicamentos] = useState("");
+    const [comorbis, setComorbis] = useState("");
+
+    async function getDatos_Usuarios(){
+        var getlocal = localStorage.getItem("id")
+        console.log(getlocal);
+        setId_usuario(getlocal);
+        const historial = await axios.get(`/miHistorial/${id_usuario}`);
+    }
+    useEffect(()=>{
+        getDatos_Usuarios();
+    }, []);
     return (
     <div>
         <Head>
@@ -92,6 +116,7 @@ export default function Home() {
                     <FormGroup inline>
                         <Label for="exampleUser">Nombre Completo</Label>
                         <Input
+                        value={nombre_completo}
                             required 
                             id="exampleUser"
                             name="usuario"
@@ -102,7 +127,7 @@ export default function Home() {
                 <Col xs="12" md="4">
                     <FormGroup inline>
                         <Label for="exampleUser">Edad</Label>
-                        <Input type="number"
+                        <Input value={edad} onChange={(event)=> setEdad(event.target.value)} type="number"
                             required 
                             id="exampleUser"
                             name="usuario"
@@ -111,8 +136,8 @@ export default function Home() {
                 </Col>
                 <Col xs="12" md="3">
                     <FormGroup inline>
-                        <Label for="exampleUser">Setso</Label>
-                        <Input type="select" name="select" id="exampleSelect">
+                        <Label for="exampleUser">Sexo</Label>
+                        <Input value={sexo} onChange={(event)=> setSexo(event.target.value)} type="select" name="select" id="exampleSelect">
                             <option disabled>Elige opcion</option>
                             <option>Hombre</option>
                             <option>Mujer</option>
@@ -122,7 +147,7 @@ export default function Home() {
                 <Col xs="12" md="3">
                     <FormGroup>
                         <Label for="exampleUser">Altura</Label>
-                        <Input type="number"
+                        <Input value={altura} onChange={(event)=> setAltura(event.target.value)} type="number"
                             required 
                             id="exampleUser"
                             name="usuario"
@@ -132,7 +157,7 @@ export default function Home() {
                 <Col xs="12" md="3">
                     <FormGroup>
                         <Label for="exampleUser">Peso</Label>
-                        <Input type="number"
+                        <Input value={peso} onChange={(event)=> setPeso(event.target.value)} type="number"
                             required 
                             id="exampleUser"
                             name="usuario"
@@ -142,7 +167,7 @@ export default function Home() {
                 <Col xs="12" md="3">
                     <FormGroup>
                         <Label for="exampleUser">Tipo de Sangre</Label>
-                        <Input type="select" name="select" id="exampleSelect">
+                        <Input value={tipo_sangre}  onChange={(event)=> setTipo_sangre(event.target.value)} type="select" name="select" id="exampleSelect">
                             <option disabled>Elige opcion</option>
                             <option>A positivo (A +)</option>
                             <option>A negativo (A-)</option>
@@ -163,6 +188,7 @@ export default function Home() {
                     <FormGroup inline>
                         <Label for="alergias">Indica a que eres Alergico</Label>
                         <Input
+                        value={d_alergias} onChange={(event)=> setD_alergias(event.target.value)}
                             required 
                             id="alergias"
                             name="alergias_name"
@@ -173,6 +199,7 @@ export default function Home() {
                     <FormGroup inline>
                         <Label for="alcohol">¿Cada cuanto tomas Alcohol?</Label>
                         <Input
+                        value={d_alcohol} onChange={(event)=> setD_alcohol(event.target.value)}
                             required 
                             id="alcohol"
                             name="alcohol_name"
@@ -183,6 +210,7 @@ export default function Home() {
                     <FormGroup inline>
                         <Label for="cigarros">Cigarros por día</Label>
                         <Input
+                        value={d_tabaquismo} onChange={(event)=> setD_tabaquismo(event.target.value)}
                             required 
                             id="cigarros"
                             name="dejazion_name"
@@ -193,6 +221,7 @@ export default function Home() {
                     <FormGroup inline>
                         <Label for="drugs">Droga, cantidad y frecuencia</Label>
                         <Input
+                        value={d_drogas} onChange={(event)=> setD_drogas(event.target.value)}
                             required 
                             id="drugs"
                             name="drugs_name"
@@ -203,6 +232,7 @@ export default function Home() {
                     <FormGroup inline>
                         <Label for="medicinas">Medicamentos y frecuencia</Label>
                         <Input
+                        value={d_medicamentos} onChange={(event)=> setD_medicamentos(event.target.value)}
                             required 
                             id="medicinas"
                             name="medicinas_name"
@@ -214,7 +244,7 @@ export default function Home() {
             <Row>
             <FormGroup>
                 <Label for="exampleText">Comorbilidades</Label>
-                <Input type="textarea" name="text" id="exampleText" />
+                <Input value={comorbis} onChange={(event)=> setComorbis(event.target.value)} type="textarea" name="text" id="exampleText" />
             </FormGroup>
             </Row>
             <Row>

@@ -3,7 +3,12 @@ const {Usuario} = require('../../db');
 const {check, validationResult} = require('express-validator');
 const e = require("express");
 
-
+router.get('/:id', async(req, res)=>{
+    const usuario = await Usuario.findOne({
+        where:{ id: req.params.id}
+    });
+    res.json(usuario);
+});
 
 
 router.get('/', async (req, res)=>{
