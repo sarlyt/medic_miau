@@ -1,4 +1,6 @@
 import Head from "next/head";
+import { useState, useffect } from "react";
+
 import {
     Table,
     Card,
@@ -13,9 +15,22 @@ import {
     Label,
     Input,
     FormText,
+    Modal,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+
 } from 'reactstrap';
 
 export default function Home() {
+    const [modalOpen, setModalOpen] = useState(false);
+    const [motivoConsulta, setMotivoConsulta] = useState('');
+
+    function toggle(){
+        setModalOpen(!modalOpen);
+    }
+
+
     return (
     <div>
         <Head>
@@ -61,8 +76,64 @@ export default function Home() {
                         </tr>
                     </tbody>
                 </Table>
-            </Row>
+            </Row>  
         </Container>
+
+
+        <Button color="danger" onClick={toggle}>nueva cita</Button>
+        <Modal size="lg" isOpen={modalOpen} fade={false} toggle={toggle} >
+          <ModalHeader toggle={toggle}>Nueva Cita</ModalHeader>
+          <ModalBody>
+          <Table hover>
+                    <thead>
+                        <tr>
+                        <th>#</th>
+                        <th>Nombre de doctor</th>
+                        <th>Especialidad</th>
+                        <th>Seleccionar</th>
+                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Luz de mi corazao</td>
+                            <td>Buggeame</td>
+                            <td>
+                                <FormGroup check>
+                                    <Label check>
+                                        <Input type="radio" name="radio2" />
+                                    </Label>
+                                </FormGroup>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Sarlyt</td>
+                            <td>su drug pega como mula - el tuco</td>
+                            <td>
+                                <FormGroup check>
+                                    <Label check>
+                                        <Input type="radio" name="radio2" />
+                                    </Label>
+                                </FormGroup>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </Table>
+          
+            <FormGroup>
+                <Label for="exampleText">Motivo de consulta</Label>
+                <Input value={motivoConsulta} onChange={(event)=> setMotivoConsulta(event.target.value)} type="textarea" name="text" id="exampleText" />
+            </FormGroup>
+
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={toggle}>Solicitar cita</Button>{' '}
+            <Button color="secondary" onClick={toggle}>Cancelar</Button>
+          </ModalFooter>
+        </Modal>
     </div>
 );
 }
