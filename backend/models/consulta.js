@@ -10,6 +10,7 @@ module.exports = (sequelize, type)=>{
         id_medico:type.INTEGER,
         id_usuario:type.INTEGER,
         descripcion:type.STRING,
+        fecha_consulta:type.DATE,
     });
 }
 

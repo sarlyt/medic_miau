@@ -20,26 +20,31 @@ export default function Home() {
     const [alergias, setAlergias] = useState(true);
     //Funcion pro
     function toggle_alergias(){
+        setD_alergias('');
         setAlergias(!alergias);
     }
     const [alcohol, setAlcohol] = useState(true);
     //Funcion pro
     function toggle_alcohol(){
+        setD_alcohol('');
         setAlcohol(!alcohol);
     }
     const [cigarros, setCigarros] = useState(true);
     //Funcion pro
     function toggle_cigarros(){
+        setD_tabaquismo('');
         setCigarros(!cigarros);
     }
     const [drugs, setDrugs] = useState(true);
     //Funcion pro
     function toggle_drugs(){
+        setD_drogas('');
         setDrugs(!drugs);
     }
     const [medicinas, setMedicinas] = useState(true);
     //Funcion pro
     function toggle_medicinas(){
+        setD_medicamentos('');
         setMedicinas(!medicinas);
     }
     const [id_usuario, setId_usuario] = useState("");
@@ -55,13 +60,80 @@ export default function Home() {
     const [d_drogas, setD_drogas] = useState("");
     const [d_medicamentos, setD_medicamentos] = useState("");
     const [comorbis, setComorbis] = useState("");
+    const [nuevoUsuario, setNuevoUsuario]=useState(true);
+    const [id_consulta, setId_consulta]= useState(0);
 
-    async function getDatos_Usuarios(){
-        var getlocal = localStorage.getItem("id")
+    async function getDatos_Usuarios(){ 
+        var getlocal = await localStorage.getItem("id");
         console.log(getlocal);
         setId_usuario(getlocal);
-        const historial = await axios.get(`/miHistorial/${id_usuario}`);
+        try {
+            console.log('on get adtos');
+            const historial = await axios.get(`/miHistorial/${getlocal}`);
+            console.log(historial.data);
+            if(historial.data != null){
+                setNombre_completo(historial.data.nombre_completo);
+                setEdad(historial.data.edad);
+                setSexo(historial.data.sexo);
+                setAltura(historial.data.altura);
+                setPeso(historial.data.peso);
+                setTipo_sangre(historial.data.tipo_sangre);
+                setD_alergias(historial.data.d_alergias);
+                setD_alcohol(historial.data.d_alcohol);
+                setD_tabaquismo(historial.data.d_tabaquismo);
+                setD_drogas(historial.data.d_drogas);
+                setD_medicamentos(historial.data.d_medicamentos);
+                setComorbis(historial.data.comorbis);
+                setNuevoUsuario(false);
+                if(historial.data.d_alergias!= null && historial.data.d_alergias != ''){
+                    setAlergias(false)
+
+                }
+                if(historial.data.d_alcohol!= null && historial.data.d_alcohol != ''){
+                    setAlcohol(false)
+
+                }
+                if(historial.data.d_tabaquismo!= null && historial.data.d_tabaquismo != ''){
+                    setCigarros(false)
+
+                }
+                if(historial.data.d_drogas!= null && historial.data.d_drogas != ''){
+                    setDrugs(false)
+
+                }
+                if(historial.data.d_medicamentos!= null && historial.data.d_medicamentos != ''){
+                    setMedicinas(false)
+
+                }
+                
+                
+                
+                
+                
+            }
+            
+        } catch (error) {
+            console.log(error);
+            setNuevoUsuario(true);
+            
+        }
+        
+        
     }
+    
+    async function nuevoActualiza(){
+        var nuevoHistory={id_usuario, nombre_completo, edad, sexo, altura, peso, tipo_sangre, d_alergias, d_alcohol, d_tabaquismo, d_drogas, d_medicamentos, comorbis}
+        if(nuevoUsuario){
+            const historial = await axios.post("/miHistorial/", nuevoHistory);
+            console.log(historial);
+            setNuevoUsuario(false);
+            
+        }else{
+            const historial = await axios.put(`/miHistorial/${id_usuario}`, nuevoHistory);
+            
+        }
+    }
+
     useEffect(()=>{
         getDatos_Usuarios();
     }, []);
@@ -81,31 +153,31 @@ export default function Home() {
                 <Form>
                     <FormGroup check inline >
                             <Label check>
-                                <Input onChange={toggle_alergias} type="checkbox" />{' '}
+                                <Input checked={!alergias} onChange={toggle_alergias} type="checkbox" />{' '}
                                 Alergias
                             </Label>
                         </FormGroup>
                         <FormGroup check inline>
                             <Label check>
-                                <Input onChange={toggle_alcohol} type="checkbox" />{' '}
+                                <Input checked={!alcohol} onChange={toggle_alcohol} type="checkbox" />{' '}
                                 Consumo de Alcohol
                             </Label>
                         </FormGroup>
                         <FormGroup check inline>
                             <Label check>
-                                <Input onChange={toggle_cigarros} type="checkbox" />{' '}
+                                <Input checked={!cigarros} onChange={toggle_cigarros} type="checkbox" />{' '}
                                 Tabaquismo
                             </Label>
                         </FormGroup>
                         <FormGroup check inline>
                             <Label check>
-                                <Input onChange={toggle_drugs}type="checkbox" />{' '}
+                                <Input checked={!drugs} onChange={toggle_drugs}type="checkbox" />{' '}
                                 Drogas ilicitas
                             </Label>
                         </FormGroup>
                         <FormGroup check inline>
                             <Label check>
-                                <Input onChange={toggle_medicinas} type="checkbox" />{' '}
+                                <Input checked={!medicinas} onChange={toggle_medicinas} type="checkbox" />{' '}
                                 Medicamentos
                             </Label>
                         </FormGroup>
@@ -116,7 +188,8 @@ export default function Home() {
                     <FormGroup inline>
                         <Label for="exampleUser">Nombre Completo</Label>
                         <Input
-                        value={nombre_completo}
+                            value={nombre_completo}
+                            onChange={(event)=> setNombre_completo(event.target.value)}
                             required 
                             id="exampleUser"
                             name="usuario"
@@ -249,9 +322,9 @@ export default function Home() {
             </Row>
             <Row>
                 <Col xs="12" md="6">
-                <Button color="success" size="lg" block>Enviar</Button>
+                <Button color="success" size="lg" onClick={nuevoActualiza} block>Enviar</Button>
                 </Col>
-                <Col xs="12" md="6">
+                <Col xs="12" md="6" hidden>
                 <Button color="danger" size="lg" block>Cancelar</Button>
                 </Col>
             </Row>
