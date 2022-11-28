@@ -120,7 +120,7 @@ return (
 
                     <Form style={styleForm}>
                         {!registro?<>
-                            <h1>Inicio de Sesion</h1>
+                            <h1>Iniciar Sesión</h1>
                             <FormGroup>
                                 <Label for="idUserName">Nombre de usuario</Label>
                                 <Input name="userName" id="idUserName"  value={userName} onChange={(event)=> setUserName(event.target.value)} required />
@@ -132,11 +132,11 @@ return (
                             <Alert color="danger" hidden={logged}>
                                 Usuario o contraseña incorrecto
                             </Alert>
-                            <Button onClick={login}>Iniciar Sesion</Button>
+                            <Button onClick={login}>Iniciar Sesión</Button>
                             <br></br>
                             <br></br>
                             <br></br>
-                            <p onClick={toggle} style={{"cursor": "pointer", 'color':'blue'}} > Registrase</p>
+                            <p onClick={toggle} style={{"cursor": "pointer", 'color':'blue'}} > ¿ No tiene una cuenta ? Registrate aquí</p>
                         </>
                     :
                     <>
@@ -151,26 +151,26 @@ return (
                             </FormGroup>
                            
                             <FormGroup>
-                                <Label for="idPasswordConfirm">confirma contraseña</Label>
+                                <Label for="idPasswordConfirm">Confirma tu contraseña</Label>
                                 <Input type="password" name="passwordConfirm" id="idPasswordConfirm" value={password2} onChange={(event)=> setPassword2(event.target.value)} required />
                             </FormGroup>
                             <FormGroup check >
                             <Label check>
                                 <Input onChange={(event)=> setTipo(!tipo)} type="checkbox" />
-                                Registrarme Como Medico
+                                Registrarme Como Médico
                             </Label>
 
                             <Alert color="success" hidden={registrado}>
-                                Usuario registrado con exito por favor inicie sesion
+                                Usuario registrado con exito por favor inicie sesión
                             </Alert>
                             
                         </FormGroup>
 
-                            <Button  onClick={registrar} >Registrar</Button>
+                            <Button  onClick={registrar} >Crear Cuenta </Button>
                             <br></br>
                             <br></br>
                             <br></br>
-                            <p onClick={toggle} style={{"cursor": "pointer", 'color':'blue'}} > Iniciar Sesion</p>
+                            <p onClick={toggle} style={{"cursor": "pointer", 'color':'blue'}} > Iniciar Sesión</p>
                     </>
 
                     }
