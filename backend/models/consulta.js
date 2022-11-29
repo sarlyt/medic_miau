@@ -1,3 +1,4 @@
+const { Type } = require("react-feather");
 
 module.exports = (sequelize, type)=>{
     return sequelize.define('consulta',{
@@ -10,7 +11,8 @@ module.exports = (sequelize, type)=>{
         id_medico:type.INTEGER,
         id_usuario:type.INTEGER,
         descripcion:type.STRING,
-        fecha_consulta:type.DATE,
+        fecha_consulta:type.STRING,
+        hora_consulta:type.STRING,
     });
 }
 

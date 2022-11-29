@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const {Perfildoc} = require('../../db');
-const {check, validationResult} = require('express-validator');
 
 
 router.get('/get-all', async (req, res)=>{

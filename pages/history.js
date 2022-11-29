@@ -61,10 +61,9 @@ export default function Home() {
     const [d_medicamentos, setD_medicamentos] = useState("");
     const [comorbis, setComorbis] = useState("");
     const [nuevoUsuario, setNuevoUsuario]=useState(true);
-    const [id_consulta, setId_consulta]= useState(0);
 
     async function getDatos_Usuarios(){ 
-        var getlocal = await localStorage.getItem("id");
+        var getlocal = localStorage.getItem("id");
         console.log(getlocal);
         setId_usuario(getlocal);
         try {
